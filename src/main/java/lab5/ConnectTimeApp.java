@@ -25,7 +25,7 @@ public class ConnectTimeApp {
         ActorSystem system = ActorSystem.create(SYS_NAME);
         final Http http = Http.get(system);
         final ActorMaterializer materializer = ActorMaterializer.create(system);
-        ActorRef actor = system.actorOf(Props.create());
+        ActorRef actor = system.actorOf(Props.create(CasherActor.class));
         final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = createFlow(http, system, materializer, actor);
         final CompletionStage<ServerBinding> binding = http.bindAndHandle(
                 routeFlow,

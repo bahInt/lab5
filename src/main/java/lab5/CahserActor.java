@@ -1,2 +1,4 @@
-package lab5;public class CahserActor {
+package lab5;
+
+public class CahserActor {
 }

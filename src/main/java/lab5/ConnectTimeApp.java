@@ -1,6 +1,7 @@
 package lab5;
 
 import akka.NotUsed;
+import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.http.javadsl.ConnectHttp;
 import akka.http.javadsl.Http;
@@ -23,6 +24,7 @@ public class ConnectTimeApp {
         ActorSystem system = ActorSystem.create(SYS_NAME);
         final Http http = Http.get(system);
         final ActorMaterializer materializer = ActorMaterializer.create(system);
+        ActorRef actor = system.actorOf();
         final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = createFlow(http, system, materializer)
         final CompletionStage<ServerBinding> binding = http.bindAndHandle(
                 routeFlow,

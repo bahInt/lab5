@@ -3,6 +3,8 @@ package lab5;
 import akka.NotUsed;
 import akka.actor.ActorSystem;
 import akka.http.javadsl.ConnectHttp;
+import akka.http.javadsl.Http;
+import akka.http.javadsl.model.HttpRequest;
 import akka.stream.ActorMaterializer;
 
 import java.io.IOException;

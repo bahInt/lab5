@@ -20,8 +20,7 @@ public class ConnectTimeApp {
         final Http http = Http.get(system);
         final ActorMaterializer materializer =
                 ActorMaterializer.create(system);
-        final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = <вызов
-        метода которому передаем Http, ActorSystem и ActorMaterializer>;
+        final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = 
         final CompletionStage<ServerBinding> binding = http.bindAndHandle(
                 routeFlow,
                 ConnectHttp.toHost("localhost", 8080),

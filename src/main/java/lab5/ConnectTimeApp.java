@@ -37,5 +37,5 @@ public class ConnectTimeApp {
         binding.thenCompose(ServerBinding::unbind).thenAccept(unbound -> system.terminate()); // and shutdown when done
     }
 
-    public static Flow<> createFlow(){}
+    public static Flow<HttpRequest, HttpResponse, NotUsed> createFlow(){}
 }

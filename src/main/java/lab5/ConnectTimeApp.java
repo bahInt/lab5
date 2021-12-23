@@ -15,7 +15,7 @@ import java.util.concurrent.CompletionStage;
 
 public class ConnectTimeApp {
     public static void main(String[] args) throws IOException {
-        ActorSystem system = ActorSystem.create("routes");
+        ActorSystem system = ActorSystem.create("webtime");
         final Http http = Http.get(system);
         final ActorMaterializer materializer = ActorMaterializer.create(system);
         final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = createFlow(http, system, materializer)

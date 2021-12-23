@@ -15,7 +15,7 @@ import akka.stream.javadsl.Flow;
 import java.io.IOException;
 import java.util.concurrent.CompletionStage;
 
-import static akka.http.impl.util.JavaMapping.map;
+import static org.asynchttpclient.Dsl.asyncHttpClient;
 
 public class ConnectTimeApp {
     private static final String SYS_NAME = "webtimechecker";

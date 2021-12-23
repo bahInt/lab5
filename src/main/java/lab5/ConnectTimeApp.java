@@ -18,7 +18,7 @@ public class ConnectTimeApp {
 
 
     public static void main(String[] args) throws IOException {
-        ActorSystem system = ActorSystem.create("webtimechecker");
+        ActorSystem system = ActorSystem.create(SYS_NAME);
         final Http http = Http.get(system);
         final ActorMaterializer materializer = ActorMaterializer.create(system);
         final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = createFlow(http, system, materializer)

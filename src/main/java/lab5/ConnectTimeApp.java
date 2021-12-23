@@ -16,6 +16,7 @@ import java.util.concurrent.CompletionStage;
 public class ConnectTimeApp {
     private static final String SYS_NAME = "webtimechecker";
     private static final String
+    private static final String
 
 
     public static void main(String[] args) throws IOException {

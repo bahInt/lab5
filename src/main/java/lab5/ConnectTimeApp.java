@@ -16,7 +16,7 @@ import java.util.concurrent.CompletionStage;
 public class ConnectTimeApp {
     private static final String SYS_NAME = "webtimechecker";
     private static final String HOST = "localhost";
-    private static final String PORT = 8080;
+    private static final int PORT = 8080;
 
 
     public static void main(String[] args) throws IOException {

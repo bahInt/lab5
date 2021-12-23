@@ -15,6 +15,8 @@ import akka.stream.javadsl.Flow;
 import java.io.IOException;
 import java.util.concurrent.CompletionStage;
 
+import static akka.http.impl.util.JavaMapping.map;
+
 public class ConnectTimeApp {
     private static final String SYS_NAME = "webtimechecker";
     private static final String HOST = "localhost";
@@ -40,5 +42,6 @@ public class ConnectTimeApp {
     public static Flow<HttpRequest, HttpResponse, NotUsed> createFlow(Http http, ActorSystem system, ActorMaterializer materializer, ActorRef casherActor){
         .map()
         
+
     }
 }

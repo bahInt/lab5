@@ -79,6 +79,7 @@ public class ConnectTimeApp {
                 .mapAsync(reqAmount, (String url) -> {
                     AsyncHttpClient client = asyncHttpClient();
                     long startTime;
+                    client.prepareGet(url).execute();
                     long resultTime;
                 })
                 .toMat(Sink.fold(0L, Long::sum), Keep.right());

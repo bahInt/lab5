@@ -44,7 +44,7 @@ public class ConnectTimeApp {
         return Flow.of(HttpRequest.class)
                 .map((r) -> {
                     Query query = r.getUri().query();
-                    String 
+                    String url = query.getOrElse();
                 })
 
     }

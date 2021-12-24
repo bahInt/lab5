@@ -12,6 +12,7 @@ import akka.http.javadsl.model.HttpResponse;
 import akka.http.javadsl.model.Query;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
+import scala.Int;
 
 import java.io.IOException;
 import java.util.concurrent.CompletionStage;
@@ -46,6 +47,7 @@ public class ConnectTimeApp {
                 .map((r) -> {
                     Query query = r.getUri().query();
                     String url = query.getOrElse(URL, HOST);
+                    int count = Integer.parseInt();
                 })
 
     }

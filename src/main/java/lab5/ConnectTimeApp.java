@@ -17,6 +17,7 @@ import akka.stream.javadsl.Flow;
 import akka.stream.javadsl.Keep;
 import akka.stream.javadsl.Sink;
 import akka.stream.javadsl.Source;
+import org.asynchttpclient.AsyncHttpClient;
 
 import java.io.IOException;
 import java.time.Duration;
@@ -24,6 +25,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
+
+import static org.asynchttpclient.Dsl.asyncHttpClient;
 
 public class ConnectTimeApp {
     private static final String SYS_NAME = "webtimechecker";
@@ -74,7 +77,9 @@ public class ConnectTimeApp {
         return Flow.<Pair<String, Integer>>create()
                 .mapConcat(pr -> new ArrayList<>(Collections.nCopies(pr.second(), pr.first())))
                 .mapAsync(reqAmount, (String url) -> {
-                    
+                    AsyncHttpClient client = asyncHttpClient();
+                    long startTime;
+                    long resultTime;
                 })
                 .toMat(Sink.fold(0L, Long::sum), Keep.right());
     }

@@ -74,8 +74,7 @@ public class ConnectTimeApp {
                                     .thenApply(time -> {
                                         l.info("Average time for {}: {}", p.first(), (float)time/p.second());
                                         return new Pair<>(p.first(), (float)time/p.second());
-                                    })
-
+                                    });
                         }))
                 .map((r) -> {
                     casher.tell(new StorageMessage(r.first(), r.second()), ActorRef.noSender());

@@ -5,6 +5,7 @@ import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
 import akka.event.Logging;
+import akka.event.LoggingAdapter;
 import akka.http.javadsl.ConnectHttp;
 import akka.http.javadsl.Http;
 import akka.http.javadsl.ServerBinding;
@@ -36,12 +37,12 @@ public class ConnectTimeApp {
     private static final String COUNT = "repeat";
     private static final int PORT = 8080;
     private static final Duration TIMEOUT = Duration.ofSeconds(5);
-    
+    private static final Object LOG_SOURCE = System.out;
 
 
     public static void main(String[] args) throws IOException {
         ActorSystem system = ActorSystem.create(SYS_NAME);
-        l = Logging.getLogger(system, System.out);
+        LoggingAdapter l = Logging.getLogger(system, LOG_SOURCE);
         final Http http = Http.get(system);
         final ActorMaterializer materializer = ActorMaterializer.create(system);
         ActorRef actor = system.actorOf(Props.create(CasherActor.class), "cash");
@@ -51,7 +52,7 @@ public class ConnectTimeApp {
                 ConnectHttp.toHost(HOST, PORT),
                 materializer
         );
-        System.out.println("Server online at http://localhost:8080/\nPress RETURN to stop...");
+        l.info("Server online at http://{}:{}/\n", HOST, PORT);
         System.in.read();
         binding.thenCompose(ServerBinding::unbind).thenAccept(unbound -> system.terminate()); // and shutdown when done
     }

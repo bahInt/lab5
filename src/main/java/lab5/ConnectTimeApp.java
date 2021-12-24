@@ -12,6 +12,7 @@ import akka.http.javadsl.model.HttpResponse;
 import akka.http.javadsl.model.Query;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
+import javafx.util.Pair;
 import scala.Int;
 
 import java.io.IOException;
@@ -49,7 +50,9 @@ public class ConnectTimeApp {
                     Query query = r.getUri().query();
                     String url = query.getOrElse(URL, HOST);
                     int count = Integer.parseInt(query.getOrElse(COUNT, "1"));
+                    return new Pair<>(url, count);
                 })
+                
 
     }
 }

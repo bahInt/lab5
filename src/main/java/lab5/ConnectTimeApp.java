@@ -80,7 +80,6 @@ public class ConnectTimeApp {
                     casher.tell(new StorageMessage(r.first(), r.second()), ActorRef.noSender());
                     return HttpResponse.create().withEntity("Result:" + r.first() + ": " + r.second() + "\n");
                 });
-
     }
 
     private static Sink<Pair<String, Integer>, CompletionStage<Long>> formSink(int reqAmount) {

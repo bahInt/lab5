@@ -71,6 +71,7 @@ public class ConnectTimeApp {
                             return Source.from(Collections.singletonList(p))
                                     .toMat(formSink(p.second()), Keep.right())
                                     .run(materializer)
+                                    .thenApply(time -> {})
 
                         }))
                 .map((r) -> {

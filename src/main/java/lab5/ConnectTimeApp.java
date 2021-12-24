@@ -16,6 +16,7 @@ import akka.stream.javadsl.Flow;
 import javafx.util.Pair;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.util.concurrent.CompletionStage;
 
 public class ConnectTimeApp {
@@ -24,6 +25,7 @@ public class ConnectTimeApp {
     private static final String URL = "connect";
     private static final String COUNT = "repeat";
     private static final int PORT = 8080;
+    private static final Duration TIMEOUT = Duration.ofSeconds(5);
 
 
     public static void main(String[] args) throws IOException {
@@ -51,7 +53,7 @@ public class ConnectTimeApp {
                     return new Pair<>(url, count);
                 })
                 .mapAsync(2, (Pair<String, Integer> p) ->
-                        Patterns.ask().thenCompose())
+                        Patterns.ask(casher, p.first(), TIMEOUT).thenCompose())
                 .map();
 
     }

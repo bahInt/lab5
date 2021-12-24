@@ -79,7 +79,7 @@ public class ConnectTimeApp {
                         }))
                 .map((r) -> {
                     casher.tell(new StorageMessage(r.first(), r.second()), ActorRef.noSender());
-                    return ;
+                    return HttpResponse.create();
                 });
 
     }

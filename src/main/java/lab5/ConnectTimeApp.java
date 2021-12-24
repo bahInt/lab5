@@ -4,6 +4,7 @@ import akka.NotUsed;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
+import akka.event.Logging;
 import akka.http.javadsl.ConnectHttp;
 import akka.http.javadsl.Http;
 import akka.http.javadsl.ServerBinding;
@@ -35,13 +36,15 @@ public class ConnectTimeApp {
     private static final String COUNT = "repeat";
     private static final int PORT = 8080;
     private static final Duration TIMEOUT = Duration.ofSeconds(5);
+    
 
 
     public static void main(String[] args) throws IOException {
         ActorSystem system = ActorSystem.create(SYS_NAME);
+        l = Logging.getLogger(system, System.out);
         final Http http = Http.get(system);
         final ActorMaterializer materializer = ActorMaterializer.create(system);
-        ActorRef actor = system.actorOf(Props.create(CasherActor.class));
+        ActorRef actor = system.actorOf(Props.create(CasherActor.class), "cash");
         final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = createFlow(http, system, materializer, actor);
         final CompletionStage<ServerBinding> binding = http.bindAndHandle(
                 routeFlow,
@@ -81,7 +84,7 @@ public class ConnectTimeApp {
                     long startTime = System.currentTimeMillis();
                     client.prepareGet(url).execute();
                     long resultTime = System.currentTimeMillis();
-                    
+                    l.info("Connected to {} within {} milliseconds", url, resultTime);
                 })
                 .toMat(Sink.fold(0L, Long::sum), Keep.right());
     }

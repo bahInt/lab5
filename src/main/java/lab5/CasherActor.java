@@ -13,7 +13,7 @@ public class CasherActor extends AbstractActor {
     public Receive createReceive() {
         return ReceiveBuilder.create()
                 .match(String.class, r -> sender().tell(cash.get(r), ActorRef.noSender()))
-                .match(StorageMessage.class, r -> cash.put())
+                .match(StorageMessage.class, r -> cash.put(r.getUrl(), r.getAvgTime()))
                 .build();
     }
 }

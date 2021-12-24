@@ -70,6 +70,6 @@ public class ConnectTimeApp {
     }
 
     private static Sink<Pair<String, Integer>, CompletionStage<Long>> formSink(int reqAmount) {
-        return Flow
+        return Flow.<Pair<String, Integer>>create()
     }
 }

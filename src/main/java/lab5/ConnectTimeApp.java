@@ -15,6 +15,7 @@ import akka.pattern.Patterns;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
 import akka.stream.javadsl.Keep;
+import akka.stream.javadsl.Sink;
 import akka.stream.javadsl.Source;
 
 import java.io.IOException;
@@ -68,5 +69,7 @@ public class ConnectTimeApp {
 
     }
 
-    private static Sink<> formSink(int reqAmount) {}
+    private static Sink<Pair<String, Integer>, CompletionStage<Long>> formSink(int reqAmount) {
+        return Flow
+    }
 }

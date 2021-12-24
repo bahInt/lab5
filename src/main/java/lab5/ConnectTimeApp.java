@@ -20,6 +20,7 @@ import akka.stream.javadsl.Source;
 
 import java.io.IOException;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
@@ -71,7 +72,7 @@ public class ConnectTimeApp {
 
     private static Sink<Pair<String, Integer>, CompletionStage<Long>> formSink(int reqAmount) {
         return Flow.<Pair<String, Integer>>create()
-                .mapConcat()
+                .mapConcat(pr -> new ArrayList<>(Collections.nCopies(pr.second(), pr.first())))
                 .mapAsync()
                 .toMat(fold, Keep.right());
     }

@@ -21,6 +21,7 @@ import static org.asynchttpclient.Dsl.asyncHttpClient;
 public class ConnectTimeApp {
     private static final String SYS_NAME = "webtimechecker";
     private static final String HOST = "localhost";
+    private static final String URL = "connect";
     private static final int PORT = 8080;
 
 
@@ -44,7 +45,7 @@ public class ConnectTimeApp {
         return Flow.of(HttpRequest.class)
                 .map((r) -> {
                     Query query = r.getUri().query();
-                    String url = query.getOrElse();
+                    String url = query.getOrElse(URL, HOST);
                 })
 
     }

@@ -52,7 +52,7 @@ public class ConnectTimeApp {
                     int count = Integer.parseInt(query.getOrElse(COUNT, "1"));
                     return new Pair<>(url, count);
                 })
-                
+                .mapAsync(2)
 
     }
 }

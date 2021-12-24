@@ -48,7 +48,7 @@ public class ConnectTimeApp {
                 .map((r) -> {
                     Query query = r.getUri().query();
                     String url = query.getOrElse(URL, HOST);
-                    int count = Integer.parseInt(query.getOrElse());
+                    int count = Integer.parseInt(query.getOrElse(COUNT, "1"));
                 })
 
     }

@@ -43,7 +43,8 @@ public class ConnectTimeApp {
     public static Flow<HttpRequest, HttpResponse, NotUsed> createFlow(Http http, ActorSystem system, ActorMaterializer materializer, ActorRef casherActor){
         return Flow.of(HttpRequest.class)
                 .map((r) -> {
-                    Query query = 
+                    Query query = r.getUri().query();
+                    String 
                 })
 
     }

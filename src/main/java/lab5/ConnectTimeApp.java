@@ -53,7 +53,10 @@ public class ConnectTimeApp {
                     return new Pair<>(url, count);
                 })
                 .mapAsync(2, (Pair<String, Integer> p) ->
-                        Patterns.ask(casher, p.first(), TIMEOUT).thenCompose())
+                        Patterns.ask(casher, p.first(), TIMEOUT).thenCompose((Object t) -> {
+                            if((float) t >= 0) return ;
+                            return ;
+                        }))
                 .map();
 
     }

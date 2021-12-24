@@ -23,6 +23,7 @@ public class ConnectTimeApp {
     private static final String SYS_NAME = "webtimechecker";
     private static final String HOST = "localhost";
     private static final String URL = "connect";
+    private static final String COUNT = "repeat";
     private static final int PORT = 8080;
 
 
@@ -47,7 +48,7 @@ public class ConnectTimeApp {
                 .map((r) -> {
                     Query query = r.getUri().query();
                     String url = query.getOrElse(URL, HOST);
-                    int count = Integer.parseInt();
+                    int count = Integer.parseInt(query.getOrElse());
                 })
 
     }

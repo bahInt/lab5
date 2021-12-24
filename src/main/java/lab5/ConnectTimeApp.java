@@ -56,7 +56,7 @@ public class ConnectTimeApp {
                 })
                 .mapAsync(2, (Pair<String, Integer> p) ->
                         Patterns.ask(casher, p.first(), TIMEOUT).thenCompose((Object t) -> {
-                            if((float) t >= 0) return CompletableFuture.completedFuture(new Pair<>(p.first(), (float) t));
+                            if((float) t >= 0) return ;
                             return Source.from();
                         }))
                 .map();

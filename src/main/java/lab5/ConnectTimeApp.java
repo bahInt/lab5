@@ -73,7 +73,10 @@ public class ConnectTimeApp {
                                     .run(materializer)
 
                         }))
-                .map();
+                .map((r) -> {
+                    casher.tell();
+                    return ;
+                });
 
     }
 

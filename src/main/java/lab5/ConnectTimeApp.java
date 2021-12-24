@@ -38,11 +38,11 @@ public class ConnectTimeApp {
     private static final int PORT = 8080;
     private static final Duration TIMEOUT = Duration.ofSeconds(5);
     private static final Object LOG_SOURCE = System.out;
-
+    private static LoggingAdapter l;
 
     public static void main(String[] args) throws IOException {
         ActorSystem system = ActorSystem.create(SYS_NAME);
-        LoggingAdapter l = Logging.getLogger(system, LOG_SOURCE);
+        l = Logging.getLogger(system, LOG_SOURCE);
         final Http http = Http.get(system);
         final ActorMaterializer materializer = ActorMaterializer.create(system);
         ActorRef actor = system.actorOf(Props.create(CasherActor.class), "cash");
@@ -86,6 +86,7 @@ public class ConnectTimeApp {
                     client.prepareGet(url).execute();
                     long resultTime = System.currentTimeMillis();
                     l.info("Connected to {} within {} milliseconds", url, resultTime);
+                    return 
                 })
                 .toMat(Sink.fold(0L, Long::sum), Keep.right());
     }

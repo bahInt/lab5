@@ -72,7 +72,8 @@ public class ConnectTimeApp {
                                     .toMat(formSink(p.second()), Keep.right())
                                     .run(materializer)
                                     .thenApply(time -> {
-                                        return new Pair<>(p.first(), );
+                                        l.info("Average time for {}: {}", p.first(), (float)time/p.second());
+                                        return new Pair<>(p.first(), (float)time/p.second());
                                     })
 
                         }))

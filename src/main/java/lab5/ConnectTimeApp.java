@@ -69,7 +69,7 @@ public class ConnectTimeApp {
                         Patterns.ask(casher, p.first(), TIMEOUT).thenCompose((Object t) -> {
                             if((float) t >= 0) return CompletableFuture.completedFuture(new Pair<>(p.first(), (float) t));
                             return Source.from(Collections.singletonList(p))
-                                    .toMat(formSink, Keep.right())
+                                    .toMat(formSink(p.second()), Keep.right())
                                     .run(materializer)
 
                         }))
@@ -86,7 +86,7 @@ public class ConnectTimeApp {
                     client.prepareGet(url).execute();
                     long resultTime = System.currentTimeMillis();
                     l.info("Connected to {} within {} milliseconds", url, resultTime);
-                    return 
+                    return CompletableFuture.completedFuture(resultTime);
                 })
                 .toMat(Sink.fold(0L, Long::sum), Keep.right());
     }

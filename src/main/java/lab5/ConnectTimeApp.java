@@ -71,5 +71,8 @@ public class ConnectTimeApp {
 
     private static Sink<Pair<String, Integer>, CompletionStage<Long>> formSink(int reqAmount) {
         return Flow.<Pair<String, Integer>>create()
+                .mapConcat()
+                .mapAsync()
+                .toMat(fold, Keep.right());
     }
 }

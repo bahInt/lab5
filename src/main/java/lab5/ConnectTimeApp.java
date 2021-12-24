@@ -60,11 +60,13 @@ public class ConnectTimeApp {
                         Patterns.ask(casher, p.first(), TIMEOUT).thenCompose((Object t) -> {
                             if((float) t >= 0) return CompletableFuture.completedFuture(new Pair<>(p.first(), (float) t));
                             return Source.from(Collections.singletonList(p))
-                                    .toMat(testSink, Keep.right())
+                                    .toMat(formSink, Keep.right())
                                     .run(materializer)
-                                    
+
                         }))
                 .map();
 
     }
+
+    private static Sink<> formSink(int reqAmount) {}
 }

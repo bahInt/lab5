@@ -10,15 +10,13 @@ import akka.http.javadsl.ServerBinding;
 import akka.http.javadsl.model.HttpRequest;
 import akka.http.javadsl.model.HttpResponse;
 import akka.http.javadsl.model.Query;
+import akka.pattern.Patterns;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
 import javafx.util.Pair;
-import scala.Int;
 
 import java.io.IOException;
 import java.util.concurrent.CompletionStage;
-
-import static org.asynchttpclient.Dsl.asyncHttpClient;
 
 public class ConnectTimeApp {
     private static final String SYS_NAME = "webtimechecker";
@@ -53,7 +51,7 @@ public class ConnectTimeApp {
                     return new Pair<>(url, count);
                 })
                 .mapAsync(2, (Pair<String, Integer> p) ->
-                        Patterns.ask)
+                        Patterns.ask().thenCompose())
                 .map();
 
     }
